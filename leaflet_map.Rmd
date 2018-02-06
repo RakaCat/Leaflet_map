@@ -1,0 +1,27 @@
+---
+title: "Leaflet generated map"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(leaflet)
+sysdate <- Sys.Date()
+```
+
+###Data
+
+This document is created on `r sysdate`  
+Below are some cities in UK from [https://www.latlong.net/place/london-uk-14153.html]
+
+```{r data}
+df <- data.frame(cities = c('London', 'Oxford', 'Elgin, Scotland'), lng = c(-0.118092, -1.257677, -3.335724), lat = c(51.509865, 51.752022, 57.653484))
+head(df)
+```
+
+###Map
+
+```{r map}
+my_map <- df %>% leaflet() %>% addTiles() %>% addMarkers(popup = df$cities)
+my_map
+```
